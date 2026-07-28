@@ -44,5 +44,35 @@
 // =============================================================================
 
 #include <iostream>
+#include <string>
 using namespace std;
 
+string grade(int score) {
+    if (score < 0 or score > 100) {
+        return "Error: Score must be between 0 and 100";
+    }
+    else if ( score >= 80) {
+        return "Grade: A";
+    }
+    else if ( score >= 70) {
+        return "Grade: B";
+    }
+    else if ( score >= 60) {
+        return "Grade: C";
+    }
+    else if ( score >= 50) {
+        return "Grade: D";
+    }
+    else {
+        return "Grade: F";
+    }
+}
+
+
+int main() {
+    cout << "Enter your score: ";
+    int score;
+    cin >> score;
+
+    cout << grade(score);
+}

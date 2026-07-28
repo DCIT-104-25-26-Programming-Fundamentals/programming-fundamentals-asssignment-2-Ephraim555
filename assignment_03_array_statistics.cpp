@@ -42,3 +42,49 @@
 #include <iostream>
 using namespace std;
 
+string stats( int n ) {
+    if (n <=0) {
+        return "Error: number must be greater than 0";
+    }
+    int array[n];
+
+    for (int i = 0; i < n; i++ ) {
+        cout << "Enter a number: ";
+        cin >> array[i];
+    }
+
+    double sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += array[i];
+    }
+
+    double avg = sum / n;
+
+    int max = array[0];
+    for (int i = 0; i < n; i++) {
+        if (array[i] > max){
+            max = array[i];
+        }
+    }
+
+    int min = array[0];
+    for (int i = 0; i < n; i++) {
+        if (array[i] < min) {
+            min = array[i];
+        }
+    }
+
+    cout << "Results: " << endl 
+         << "Sum: " << sum << endl
+         << "Average: " << avg << endl
+         << "Maximum: " << max << endl
+         << "Minimum: " << min << endl;
+}
+
+int main() {
+    cout << "How many numbers? ";
+    int n;
+    cin >> n;
+
+    cout << stats(n);
+}

@@ -65,3 +65,190 @@
 #include <string>
 using namespace std;
 
+
+void read_matrix(int matrix[10][10], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << "Enter element [" << i << "][" << j << "]: ";
+            cin >> matrix[i][j];
+        }
+    }
+}
+
+
+void display_matrix(int matrix[10][10], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << setw(5) << matrix[i][j];
+        }
+        cout << endl;
+    }
+}
+
+
+// TRANSPOSE MATRIX
+void transpose(int matrix[10][10],
+               int result[10][10],
+               int rows,
+               int cols) {
+
+    for (int i = 0; i < cols; i++) {
+        for (int k = 0; k < rows; k++) {
+            result[i][k] = matrix[k][i];
+        }
+    }
+}
+
+
+// ADD TWO MATRICES
+
+void add_matrices(int matrix_1[10][10],
+                  int matrix_2[10][10],
+                  int result[10][10],
+                  int rows,
+                  int cols) {
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result[i][j] = matrix_1[i][j] + matrix_2[i][j];
+        }
+    }
+}
+
+
+// MULTIPLY TWO MATRICES
+
+bool mult_matrices(int matrix_1[10][10],
+                   int matrix_2[10][10],
+                   int result[10][10],
+                   int rows_1,
+                   int cols_1,
+                   int rows_2,
+                   int cols_2) {
+
+    if (cols_1 != rows_2) {
+        return false;
+    }
+
+    for (int i = 0; i < rows_1; i++) {
+        for (int j = 0; j < cols_2; j++) {
+
+            result[i][j] = 0;
+
+            for (int k = 0; k < cols_1; k++) {
+                result[i][j] += matrix_1[i][k] * matrix_2[k][j];
+            }
+        }
+    }
+
+    return true;
+}
+
+
+// MAIN FUNCTION
+
+int main() {
+    // Transpose Matrix
+    int rows, cols;
+    int matrix[10][10];
+    int result[10][10];
+
+    cout << "Enter number of rows: ";
+    cin >> rows;
+
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    cout << "\nEnter Matrix:\n";
+    read_matrix(matrix, rows, cols);
+
+    cout << "\nOriginal Matrix:\n";
+    display_matrix(matrix, rows, cols);
+
+    transpose(matrix, result, rows, cols);
+
+    cout << "\nTransposed Matrix:\n";
+    display_matrix(result, cols, rows);
+
+    // ADD Matix
+    int matrix_1[10][10];
+    int matrix_2[10][10];
+    int add_result[10][10];
+
+    cout << "Enter number of rows: ";
+    cin >> rows;
+
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    cout << "\nEnter Matrix 1:\n";
+    read_matrix(matrix_1, rows, cols);
+
+    cout << "\nEnter Matrix 2:\n";
+    read_matrix(matrix_2, rows, cols);
+
+    add_matrices(matrix_1, matrix_2, add_result, rows, cols);
+
+    cout << "\nMatrix 1:\n";
+    display_matrix(matrix_1, rows, cols);
+
+    cout << "\nMatrix 2:\n";
+    display_matrix(matrix_2, rows, cols);
+
+    cout << "\nSum of Matrix 1 and Matrix 2:\n";
+    display_matrix(add_result, rows, cols);
+
+
+    // MULTIPLICATION 
+    int rows_1, cols_1;
+    int rows_2, cols_2;
+    int mult_result[10][10];
+
+    cout << "Enter number of rows for Matrix 1: ";
+    cin >> rows_1;
+
+    cout << "Enter number of columns for Matrix 1: ";
+    cin >> cols_1;
+
+    cout << "\nEnter Matrix 1:\n";
+    read_matrix(matrix_1, rows_1, cols_1);
+
+    cout << "\nEnter number of rows for Matrix 2: ";
+    cin >> rows_2;
+
+    cout << "Enter number of columns for Matrix 2: ";
+    cin >> cols_2;
+
+    cout << "\nEnter Matrix 2:\n";
+    read_matrix(matrix_2, rows_2, cols_2);
+
+    bool multiplication_possible = mult_matrices(
+        matrix_1,
+        matrix_2,
+        mult_result,
+        rows_1,
+        cols_1,
+        rows_2,
+        cols_2
+    );
+
+    cout << "\nMatrix 1:\n";
+    display_matrix(matrix_1, rows_1, cols_1);
+
+    cout << "\nMatrix 2:\n";
+    display_matrix(matrix_2, rows_2, cols_2);
+
+    if (multiplication_possible) {
+
+        cout << "\nProduct of Matrix 1 and Matrix 2:\n";
+        display_matrix(mult_result, rows_1, cols_2);
+
+    } else {
+
+        cout << "\nError: Matrix multiplication is not possible.\n";
+        cout << "The number of columns in Matrix 1 must equal ";
+        cout << "the number of rows in Matrix 2.\n";
+    }
+
+    return 0;
+}

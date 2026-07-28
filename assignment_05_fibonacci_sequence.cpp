@@ -51,3 +51,69 @@
 #include <iostream>
 using namespace std;
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+string fibonacci(int n) {
+    if (n <= 0) {
+        return "Error: n must be a positive number";
+    }
+
+    int a = 0;
+    int b = 1;
+    string sequence = "";
+
+    for (int i = 0; i < n; i++) {
+        sequence += to_string(a);
+
+        if (i < n - 1) {
+            sequence += " ";
+        }
+
+        int next_num = a + b;
+        a = b;
+        b = next_num;
+    }
+
+    return "Fibonacci sequence: " + sequence;
+}
+
+string is_fibonacci(int num) {
+    if (num < 0) {
+        return "False";
+    }
+
+    int a = 0;
+    int b = 1;
+
+    while (a < num) {
+        int next_num = a + b;
+        a = b;
+        b = next_num;
+
+        if (a == num) {
+            return to_string(num) + " is a Fibonacci number.";
+        }
+    }
+
+    return to_string(num) + " is NOT a Fibonacci number";
+}
+
+int main() {
+    int n;
+
+    cout << "How many terms? ";
+    cin >> n;
+
+    cout << fibonacci(n) << endl;
+
+    int num;
+
+    cout << "Enter a number to check: ";
+    cin >> num;
+
+    cout << is_fibonacci(num) << endl;
+
+    return 0;
+}

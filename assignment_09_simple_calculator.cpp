@@ -73,3 +73,146 @@
 #include <cmath>
 using namespace std;
 
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double sub(double a, double b) {
+    return a - b;
+}
+
+double mul(double a, double b) {
+    return a * b;
+}
+
+bool div(double a, double b, double& result) {
+    if (b == 0) {
+        return false;
+    }
+
+    result = a / b;
+    return true;
+}
+
+bool mod(int a, int b, int& result) {
+    if (b == 0) {
+        return false;
+    }
+
+    result = a % b;
+    return true;
+}
+
+double exp(double a, double b) {
+    return pow(a, b);
+}
+
+
+int main() {
+    while (true) {
+        cout << "\n============================" << endl;
+        cout << "     SIMPLE CALCULATOR" << endl;
+        cout << "============================" << endl;
+        cout << "1. Addition" << endl;
+        cout << "2. Subtraction" << endl;
+        cout << "3. Multiplication" << endl;
+        cout << "4. Division" << endl;
+        cout << "5. Modulus" << endl;
+        cout << "6. Exponentiation" << endl;
+        cout << "7. Quit" << endl;
+
+        int choice;
+        cout << "Select an operation (1-7): ";
+        cin >> choice;
+
+        if (cin.fail()) {
+            cout << "Error: Please enter a number from 1 to 7." << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            break;
+        }
+
+        if (choice < 1 || choice > 7) {
+            cout << "Invalid choice. Please select a valid operation." << endl;
+            continue;
+        }
+
+        double num1, num2;
+
+        cout << "Enter first number: ";
+        cin >> num1;
+
+        cout << "Enter second number: ";
+        cin >> num2;
+
+        if (cin.fail()) {
+            cout << "Error: Please enter valid numbers." << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
+
+        if (choice == 1) {
+            double result = add(num1, num2);
+            cout << "Result: " << num1 << " + " << num2
+                 << " = " << result << endl;
+        }
+
+        else if (choice == 2) {
+            double result = sub(num1, num2);
+            cout << "Result: " << num1 << " - " << num2
+                 << " = " << result << endl;
+        }
+
+        else if (choice == 3) {
+            double result = mul(num1, num2);
+            cout << "Result: " << num1 << " * " << num2
+                 << " = " << result << endl;
+        }
+
+        else if (choice == 4) {
+            double result;
+
+            if (!div(num1, num2, result)) {
+                cout << "Error: Cannot divide by zero." << endl;
+            }
+            else {
+                cout << fixed << setprecision(2);
+                cout << "Result: " << num1 << " / " << num2
+                     << " = " << result << endl;
+            }
+        }
+
+        else if (choice == 5) {
+            int int_num1 = static_cast<int>(num1);
+            int int_num2 = static_cast<int>(num2);
+            int result;
+
+            if (!mod(int_num1, int_num2, result)) {
+                cout << "Error: Cannot divide by zero." << endl;
+            }
+            else {
+                cout << "Result: " << int_num1 << " % " << int_num2
+                     << " = " << result << endl;
+            }
+        }
+
+        else if (choice == 6) {
+            double result = exp(num1, num2);
+            cout << "Result: " << num1 << " ** " << num2
+                 << " = " << result << endl;
+        }
+    }
+
+    return 0;
+}
